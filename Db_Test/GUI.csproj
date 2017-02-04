@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9A7B2149-78F7-4C55-A8DE-FDF0464F8779}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DB_Project</RootNamespace>
+    <AssemblyName>Db_Test</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddMovieForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddMovieForm.Designer.cs">
+      <DependentUpon>AddMovieForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CategoryListForm.Designer.cs">
+      <DependentUpon>CategoryListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DelCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DelCategoryForm.Designer.cs">
+      <DependentUpon>DelCategoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DelMovieForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DelMovieForm.Designer.cs">
+      <DependentUpon>DelMovieForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MangeCategoriesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MangeCategoriesForm.Designer.cs">
+      <DependentUpon>MangeCategoriesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MangeMoviesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MangeMoviesForm.Designer.cs">
+      <DependentUpon>MangeMoviesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuForm.Designer.cs">
+      <DependentUpon>MenuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MovieListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MovieListForm.Designer.cs">
+      <DependentUpon>MovieListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCategoryForm.Designer.cs">
+      <DependentUpon>NewCategoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateCategoryForm.Designer.cs">
+      <DependentUpon>UpdateCategoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateMovieForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateMovieForm.Designer.cs">
+      <DependentUpon>UpdateMovieForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WatchMovieForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WatchMovieForm.Designer.cs">
+      <DependentUpon>WatchMovieForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AddMovieForm.resx">
+      <DependentUpon>AddMovieForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CategoryListForm.resx">
+      <DependentUpon>CategoryListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DelCategoryForm.resx">
+      <DependentUpon>DelCategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DelMovieForm.resx">
+      <DependentUpon>DelMovieForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MangeCategoriesForm.resx">
+      <DependentUpon>MangeCategoriesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MangeMoviesForm.resx">
+      <DependentUpon>MangeMoviesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuForm.resx">
+      <DependentUpon>MenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MovieListForm.resx">
+      <DependentUpon>MovieListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewCategoryForm.resx">
+      <DependentUpon>NewCategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UpdateCategoryForm.resx">
+      <DependentUpon>UpdateCategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateMovieForm.resx">
+      <DependentUpon>UpdateMovieForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WatchMovieForm.resx">
+      <DependentUpon>WatchMovieForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.Config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{ac12d836-ed50-4fa4-bcd6-4718b4949476}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data Access Layer\Data Access Layer.csproj">
+      <Project>{90ec4db0-001e-4c12-9f47-e217bea301a7}</Project>
+      <Name>Data Access Layer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
