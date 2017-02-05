@@ -119,7 +119,7 @@ namespace DB_Project
         /// </summary>
         private void UpdateCategoryComboBox()
         {
-            foreach (var item in cLogic.GetCategoriesName())
+            foreach (var item in cLogic.GetCategoriesNamesList())
             {
                 comboBoxCategory.Items.Add(item);
             }

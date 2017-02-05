@@ -58,7 +58,7 @@ namespace DB_Project
         {
             comboBoxCategoryName.Items.Clear();
 
-            foreach (var item in logic.GetCategoriesName())
+            foreach (var item in logic.GetCategoriesNamesList())
             {
                 comboBoxCategoryName.Items.Add(item);
             }

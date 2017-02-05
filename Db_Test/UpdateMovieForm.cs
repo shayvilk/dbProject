@@ -85,7 +85,7 @@ namespace DB_Project
         {
             comboBoxCategoryName.Items.Clear();
 
-            foreach (var item in cLogic.GetCategoriesName() )
+            foreach (var item in cLogic.GetCategoriesNamesList() )
             {
                 comboBoxCategoryName.Items.Add(item);
             }
@@ -144,7 +144,7 @@ namespace DB_Project
         {
             comboBoxCategoryName.Items.Clear();
 
-            foreach (var item in cLogic.GetCategoriesName())
+            foreach (var item in cLogic.GetCategoriesNamesList())
             {
                 comboBoxCategoryName.Items.Add(item);
             }

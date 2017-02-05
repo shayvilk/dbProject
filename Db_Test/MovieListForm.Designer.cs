@@ -45,10 +45,10 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Watch});
-            this.dataGridView1.Location = new System.Drawing.Point(8, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(9, 14);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(800, 430);
+            this.dataGridView1.Size = new System.Drawing.Size(900, 484);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -62,12 +62,12 @@
             // 
             // MovieListForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(811, 454);
+            this.ClientSize = new System.Drawing.Size(912, 511);
             this.Controls.Add(this.dataGridView1);
             this.Name = "MovieListForm";
-            this.Text = "MovieListForm";
+            this.Text = "My Movie";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

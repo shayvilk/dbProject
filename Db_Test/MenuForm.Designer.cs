@@ -36,9 +36,9 @@
             // 
             // buttonMovieList
             // 
-            this.buttonMovieList.Location = new System.Drawing.Point(14, 59);
+            this.buttonMovieList.Location = new System.Drawing.Point(16, 66);
             this.buttonMovieList.Name = "buttonMovieList";
-            this.buttonMovieList.Size = new System.Drawing.Size(107, 69);
+            this.buttonMovieList.Size = new System.Drawing.Size(120, 78);
             this.buttonMovieList.TabIndex = 0;
             this.buttonMovieList.Text = "Movies list";
             this.buttonMovieList.UseVisualStyleBackColor = true;
@@ -46,9 +46,9 @@
             // 
             // buttonManegeCat
             // 
-            this.buttonManegeCat.Location = new System.Drawing.Point(240, 59);
+            this.buttonManegeCat.Location = new System.Drawing.Point(270, 66);
             this.buttonManegeCat.Name = "buttonManegeCat";
-            this.buttonManegeCat.Size = new System.Drawing.Size(107, 69);
+            this.buttonManegeCat.Size = new System.Drawing.Size(120, 78);
             this.buttonManegeCat.TabIndex = 4;
             this.buttonManegeCat.Text = "Manege categories";
             this.buttonManegeCat.UseVisualStyleBackColor = true;
@@ -56,9 +56,9 @@
             // 
             // buttonManegeMovies
             // 
-            this.buttonManegeMovies.Location = new System.Drawing.Point(127, 59);
+            this.buttonManegeMovies.Location = new System.Drawing.Point(143, 66);
             this.buttonManegeMovies.Name = "buttonManegeMovies";
-            this.buttonManegeMovies.Size = new System.Drawing.Size(107, 69);
+            this.buttonManegeMovies.Size = new System.Drawing.Size(120, 78);
             this.buttonManegeMovies.TabIndex = 5;
             this.buttonManegeMovies.Text = "Manege movies";
             this.buttonManegeMovies.UseVisualStyleBackColor = true;
@@ -66,9 +66,9 @@
             // 
             // buttonOpenYouTube
             // 
-            this.buttonOpenYouTube.Location = new System.Drawing.Point(14, 12);
+            this.buttonOpenYouTube.Location = new System.Drawing.Point(16, 14);
             this.buttonOpenYouTube.Name = "buttonOpenYouTube";
-            this.buttonOpenYouTube.Size = new System.Drawing.Size(333, 31);
+            this.buttonOpenYouTube.Size = new System.Drawing.Size(375, 35);
             this.buttonOpenYouTube.TabIndex = 6;
             this.buttonOpenYouTube.Text = "Open YouTube";
             this.buttonOpenYouTube.UseVisualStyleBackColor = true;
@@ -76,15 +76,15 @@
             // 
             // MenuForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 140);
+            this.ClientSize = new System.Drawing.Size(404, 158);
             this.Controls.Add(this.buttonOpenYouTube);
             this.Controls.Add(this.buttonManegeMovies);
             this.Controls.Add(this.buttonManegeCat);
             this.Controls.Add(this.buttonMovieList);
             this.Name = "MenuForm";
-            this.Text = "MenuForm";
+            this.Text = "YouTube app";
             this.ResumeLayout(false);
 
         }

@@ -47,10 +47,19 @@ namespace BusinessLogic
        }
 
        /// <summary>
-       /// Updeating existing category
+       /// Updeating existing category.
+       /// this method has 2 overloads, one that takes the oldName and NewNAme, and one that takes the new names and the CategoryID.
        /// </summary>
        /// <param name="newName"></param>
        /// <param name="selectedName"></param>
+       /// 
+       public void UpdateCategories(String newName, int categoryID)
+       {
+           string categoryName = GetCategoryNameByID(categoryID);
+           UpdateCategories(newName, categoryName);
+       }
+
+
        public void UpdateCategories(string newName, string selectedName)
        {
            if (newName == "")
@@ -84,9 +93,15 @@ namespace BusinessLogic
        }
 
        /// <summary>
-       /// Deleteing category from the DB
+       /// Deleteing category from the DB.
+       /// this methos has 2 overloads, one that takes the Name and one that takes the ID
        /// </summary>
        /// <param name="catName"></param>
+       /// 
+       public void DeleteCategory(int categoryID)
+       {
+           DeleteCategory(GetCategoryNameByID(categoryID));
+       }
        public void DeleteCategory(string catName)
        {
            // Checking if the selected category isn't associated with a movie\movies
@@ -119,7 +134,7 @@ namespace BusinessLogic
        /// Gets the categories name from the DB
        /// </summary>
        /// <returns></returns>
-       public List<string> GetCategoriesName()
+       public List<string> GetCategoriesNamesList()
        {
            List<string> categoriesName = new List<string>(); // Holds the names of the categories
 
@@ -139,6 +154,7 @@ namespace BusinessLogic
 
            dgv.ColumnCount = 2;
            dgv.Columns[0].Name = "Category ID";
+           dgv.Columns["Category ID"].ReadOnly = true;
            dgv.Columns[1].Name = "Category Name";
 
            var query = db.Categories.Select(c => new { c.CategoryID, c.CategoryName });
@@ -151,6 +167,12 @@ namespace BusinessLogic
 
                dgv.Rows.Add(dgvRows.ToArray());
            }
+       }
+
+       private string GetCategoryNameByID(int categoryID)
+       {
+           var query = db.Categories.Where(c => c.CategoryID == categoryID).FirstOrDefault();
+           return query.CategoryName;
        }
                       
     }
