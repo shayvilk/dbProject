@@ -19,7 +19,7 @@ namespace DB_Project
         {
             InitializeComponent();
 
-            logic.GetAllMoviesDetails(dataGridView1);
+            logic.GetAllMoviesDetails(dataGridView1,false);
         }
 
 

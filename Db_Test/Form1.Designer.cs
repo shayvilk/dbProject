@@ -82,7 +82,7 @@
             // 
             // dataGridViewMovies
             // 
-            this.dataGridViewMovies.AllowUserToAddRows = false;
+            this.dataGridViewMovies.AllowDrop = true;
             this.dataGridViewMovies.AllowUserToDeleteRows = false;
             this.dataGridViewMovies.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -94,10 +94,11 @@
             this.Watch});
             this.dataGridViewMovies.Location = new System.Drawing.Point(163, 41);
             this.dataGridViewMovies.Name = "dataGridViewMovies";
-            this.dataGridViewMovies.ReadOnly = true;
-            this.dataGridViewMovies.Size = new System.Drawing.Size(761, 81);
+            this.dataGridViewMovies.Size = new System.Drawing.Size(789, 280);
             this.dataGridViewMovies.TabIndex = 1;
             this.dataGridViewMovies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMovies_CellContentClick_1);
+            //this.dataGridViewMovies.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMovies_CallEndEdit);
+            this.dataGridViewMovies.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridViewMovies_DataError);
             // 
             // Watch
             // 
@@ -138,9 +139,9 @@
             // dataGridViewCategories
             // 
             this.dataGridViewCategories.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCategories.Location = new System.Drawing.Point(164, 158);
+            this.dataGridViewCategories.Location = new System.Drawing.Point(163, 327);
             this.dataGridViewCategories.Name = "dataGridViewCategories";
-            this.dataGridViewCategories.Size = new System.Drawing.Size(760, 150);
+            this.dataGridViewCategories.Size = new System.Drawing.Size(788, 150);
             this.dataGridViewCategories.TabIndex = 2;
             this.dataGridViewCategories.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCategories_CellEndEdit);
             // 
