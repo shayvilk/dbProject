@@ -42,7 +42,9 @@
             // 
             // openBrowser_btn
             // 
-            this.openBrowser_btn.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.openBrowser_btn.BackColor = System.Drawing.Color.White;
+            this.openBrowser_btn.BackgroundImage = global::DB_Project.Properties.Resources.YouTube_logo_full_color;
+            this.openBrowser_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.openBrowser_btn.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.openBrowser_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.openBrowser_btn.Font = new System.Drawing.Font("Poor Richard", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -51,7 +53,6 @@
             this.openBrowser_btn.Name = "openBrowser_btn";
             this.openBrowser_btn.Size = new System.Drawing.Size(145, 33);
             this.openBrowser_btn.TabIndex = 0;
-            this.openBrowser_btn.Text = "Open YouTube";
             this.openBrowser_btn.UseVisualStyleBackColor = false;
             // 
             // moviesListBtn
@@ -97,8 +98,8 @@
             this.dataGridViewMovies.Size = new System.Drawing.Size(789, 280);
             this.dataGridViewMovies.TabIndex = 1;
             this.dataGridViewMovies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMovies_CellContentClick_1);
-            //this.dataGridViewMovies.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMovies_CallEndEdit);
             this.dataGridViewMovies.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridViewMovies_DataError);
+            this.dataGridViewMovies.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewMovies_RowsAdded);
             // 
             // Watch
             // 

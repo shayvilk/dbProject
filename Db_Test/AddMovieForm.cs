@@ -47,8 +47,8 @@ namespace DB_Project
 
             MoviesLogic mLogic = new MoviesLogic();
 
-            mLogic.AddNewMovie(textBoxName.Text, comboBoxHour.SelectedItem.ToString(), comboBoxMin.SelectedItem.ToString(),
-                               comboBoxSec.SelectedItem.ToString(), textBoxLink.Text, comboBoxCategory.Text);
+            //mLogic.AddNewMovie(textBoxName.Text, comboBoxHour.SelectedItem.ToString(), comboBoxMin.SelectedItem.ToString(),
+            //                   comboBoxSec.SelectedItem.ToString(), textBoxLink.Text, comboBoxCategory.Text);
 
             
             //Clearing the textbox & the combobox after the adding is done

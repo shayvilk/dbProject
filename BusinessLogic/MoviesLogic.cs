@@ -24,7 +24,7 @@ namespace BusinessLogic
        /// <param name="_sec"></param>
        /// <param name="movieLink"></param>
        /// <param name="categoryName"></param>
-       public void AddNewMovie(string movieName, string _hour, string _min, string _sec, string movieLink, string categoryName)
+       public void AddNewMovie(string movieName, string duration, string movieLink, string categoryName)
        {
             // Finding the CategoryID matching the selected categoryName
            var query = db.Categories.Where(c => c.CategoryName == categoryName).FirstOrDefault();
@@ -34,7 +34,7 @@ namespace BusinessLogic
                MovieName =movieName,
                CategoryName = categoryName,
                CategoryID = query.CategoryID,
-               Duration = ConvertingToTimeSpan(_hour,_min,_sec),
+               Duration = convertDurationStringToTimeSpan(duration),
                MovieLink = movieLink
            };
 
@@ -91,12 +91,7 @@ namespace BusinessLogic
                var catID = db.Categories.Where(c => c.CategoryName == categoryName).FirstOrDefault();
 
                    query.MovieName = newMovieName; // If he did change
-               string[] strTsArr = duration.Split(':');
-               int h = int.Parse(strTsArr[0]);
-               int m = int.Parse(strTsArr[1]);
-               int s = int.Parse(strTsArr[2]);
-
-               TimeSpan ts = new TimeSpan(h,m,s);
+                   TimeSpan ts = convertDurationStringToTimeSpan(duration);
                query.Duration = ts;
                query.MovieLink = movieLink;
                query.CategoryName = categoryName;
@@ -110,13 +105,24 @@ namespace BusinessLogic
                MessageBox.Show("There is no movie named " + query.MovieName);
        }
 
+       private static TimeSpan convertDurationStringToTimeSpan(string duration)
+       {
+           string[] strTsArr = duration.Split(':');
+           int h = int.Parse(strTsArr[0]);
+           int m = int.Parse(strTsArr[1]);
+           int s = int.Parse(strTsArr[2]);
+
+           TimeSpan ts = new TimeSpan(h, m, s);
+           return ts;
+       }
+
        /// <summary>
        /// Deleting movie from the DB
        /// </summary>
-       /// <param name="movieToDelete"></param>
-       public void DeleteMovie(string movieToDelete)
+       /// <param name="movieIdToDelete"></param>
+       public void DeleteMovie(int movieIdToDelete)
        {
-           var query = db.Movies.Where(m => m.MovieName == movieToDelete).FirstOrDefault();
+           var query = db.Movies.Where(m => m.MovieID == movieIdToDelete).FirstOrDefault();
 
 
            if (query != null)
@@ -129,7 +135,7 @@ namespace BusinessLogic
            }
            else
                // If someone delete the movie from the database before the user pressed the "delete" button.
-               MessageBox.Show("The movie: " + movieToDelete + " is no longer exist"); 
+               MessageBox.Show("The movie: " + movieIdToDelete + " is no longer exist"); 
        }
 
 
@@ -176,7 +182,7 @@ namespace BusinessLogic
            });
            ArrayList CategoryList = new ArrayList();
            System.Data.DataTable dataTable = new DataTable();
-           dataTable.Columns.Add("CategoryId");
+           dataTable.Columns.Add("CategoryId").ReadOnly = true;
            dataTable.Columns.Add("CategoryName");
 
 
@@ -199,16 +205,14 @@ namespace BusinessLogic
 
 
            dgv.ColumnCount = 5;
-           dgv.Columns.Insert(2, columnComboBox);
-           //dgv.Columns.Add(columnComboBox);
+           dgv.Columns.Insert(2, columnComboBox); // inserts the Combobox at index 2.
            dgv.Columns[0].Name = "Movie ID";
-           
            dgv.Columns["Movie ID"].ReadOnly = true;
            dgv.Columns[1].Name = "Movie Name";
            dgv.Columns[2].Name = "Category Name";
            dgv.Columns[3].Name = "Category ID";
+           dgv.Columns["Category ID"].ReadOnly = true;
            dgv.Columns[4].Name = "Duration";
-           //dgv.Columns[4].ValueType = DataFormats.Text.
            dgv.Columns[5].Name = "Movie link";
 
            var query = db.Movies.Select(m => new
@@ -223,20 +227,26 @@ namespace BusinessLogic
 
            DataGridViewButtonColumn dgvbc = new DataGridViewButtonColumn();
            dgv.Columns.Add(dgvbc);
-           
+
            DataGridViewButtonColumn dgvSave = new DataGridViewButtonColumn();
            dgvSave.Name = "Save";
-           dgv.Columns.Add(dgvSave);
+           dgv.Columns.Add(dgvSave); 
+           
+           DataGridViewButtonColumn dgvDelete = new DataGridViewButtonColumn();
+           dgvDelete.Name = "Delete";
+           dgv.Columns.Add(dgvDelete);
 
 
            if (editable)
            {
                dgv.Columns["Save"].Visible = true;
+               dgv.Columns["Delete"].Visible = true;
            }
 
            dgvbc.HeaderText = "Click to watch";
            dgvbc.Name = "Click to watch";
            dgvSave.Name = "Save";
+           dgvDelete.Name = "Delete";
 
            foreach (var item in query)
            {
@@ -252,6 +262,7 @@ namespace BusinessLogic
                if (editable)
                {
                    dgvRows.Add(dgvSave.Name);
+                   dgvRows.Add(dgvDelete.Name);
 
                }
 

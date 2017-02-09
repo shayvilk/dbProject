@@ -33,7 +33,7 @@ namespace DB_Project
                 return;
             }
 
-            logic.DeleteMovie(comboBoxMovieName.Text);
+            //logic.DeleteMovie(comboBoxMovieName.Text);
            
             UpdateCombobox();
         }

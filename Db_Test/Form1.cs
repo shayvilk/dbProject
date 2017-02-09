@@ -49,63 +49,6 @@ namespace DB_Project
         }
 
 
-        // Creating buttons inside the dataGridView
-        private void dataGridViewMovies_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            var senderGrid = (DataGridView)sender;
-
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0 && senderGrid.Columns[e.ColumnIndex].Name == "Click to watch")
-            {
-                WatchMovieForm watchMov = new WatchMovieForm();
-                watchMov.Show();
-
-                watchMov.webBrowser1.Navigate(dataGridViewMovies.Rows[e.RowIndex].Cells[5].Value.ToString());
-            }
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0 && senderGrid.Columns[e.ColumnIndex].Name == "Save")
-            {
-
-                BuildMovieObjectAndSendToDB(sender, e);
-
-            }
-
-            //TODO - add the logic to save the updated/deleted/new movie!!!
-        }
-        
-        private void BuildMovieObjectAndSendToDB(object sender, DataGridViewCellEventArgs e)
-        {
-            var snderGrid = (DataGridView)sender;
-            int id;
-            string newName;
-            try
-            {
-                id = (int.Parse(dataGridViewMovies.Rows[e.RowIndex].Cells[0].Value.ToString()));
-
-            }
-            catch (Exception)
-            {
-
-                id = -1;
-            }
-            try
-            {
-                newName = dataGridViewMovies.Rows[e.RowIndex].Cells[1].Value.ToString();
-            }
-            catch (Exception)
-            {
-                newName = string.Empty;
-            }
-            string duration = dataGridViewMovies.Rows[e.RowIndex].Cells["Duration"].FormattedValue.ToString();
-            string catName = dataGridViewMovies.Rows[e.RowIndex].Cells["Category Name"].FormattedValue.ToString();
-            string movieLink = dataGridViewMovies.Rows[e.RowIndex].Cells["Movie link"].FormattedValue.ToString();
-            if (validateDuration(duration) && validateLink(movieLink))
-            {
-                logicMovies.UpdateMovie(id, newName, duration,movieLink ,catName);
-
-            } 
-            //^\d+:\d{2}:\d{2}$
-        }
-
-
 
         /// <summary>
         /// uses regular expressions to validate the duration
@@ -126,7 +69,7 @@ namespace DB_Project
         /// <returns></returns>
         public bool validateLink(string strLink)
         {
-            Regex regex = new Regex(@"^(ht|f)tp(s?)\:\/\/[0-9a-zA-Za]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$");
+            Regex regex = new Regex(@"^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$");
             Match match = regex.Match(strLink);
             return match.Success;
         }
@@ -202,5 +145,112 @@ namespace DB_Project
         {
 
         }
+
+
+
+        // Handeling events for buttons  inside the dataGridView
+        private void dataGridViewMovies_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0 && senderGrid.Columns[e.ColumnIndex].Name == "Click to watch")
+            {
+                WatchMovieForm watchMov = new WatchMovieForm();
+                watchMov.Show();
+                watchMov.webBrowser1.Navigate(dataGridViewMovies.Rows[e.RowIndex].Cells[5].Value.ToString());
+            }
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0 && senderGrid.Columns[e.ColumnIndex].Name == "Save")
+            {
+
+                BuildMovieObjectAndSendToDB(sender, e);
+
+            }
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0 && senderGrid.Columns[e.ColumnIndex].Name == "Delete")
+            {
+                int id;
+                try
+                {
+                    id = int.Parse(senderGrid.Rows[e.RowIndex].Cells["Movie ID"].FormattedValue.ToString());
+                }
+                catch (Exception)
+                {
+                    id = -1;
+                }
+                if ( id > 0 )
+                {
+                    logicMovies.DeleteMovie(id);
+                    refreshDataGridMovies();
+                }
+                else
+                {
+                    try
+                    {
+                        senderGrid.Rows.RemoveAt(e.RowIndex);
+                        refreshDataGridMovies();
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
+
+                }
+            }
+
+            //TODO - add the logic to save the updated/deleted/new movie!!!
+        }
+
+        private void BuildMovieObjectAndSendToDB(object sender, DataGridViewCellEventArgs e)
+        {
+            var snderGrid = (DataGridView)sender;
+            int id;
+            string newName;
+            try
+            {
+                id = (int.Parse(dataGridViewMovies.Rows[e.RowIndex].Cells[0].Value.ToString()));
+
+            }
+            catch (Exception)
+            {
+
+                id = -1;
+            }
+            try
+            {
+                newName = dataGridViewMovies.Rows[e.RowIndex].Cells[1].Value.ToString();
+            }
+            catch (Exception)
+            {
+                newName = string.Empty;
+            }
+            string duration = dataGridViewMovies.Rows[e.RowIndex].Cells["Duration"].FormattedValue.ToString();
+            string catName = dataGridViewMovies.Rows[e.RowIndex].Cells["Category Name"].FormattedValue.ToString();
+            string movieLink = dataGridViewMovies.Rows[e.RowIndex].Cells["Movie link"].FormattedValue.ToString();
+
+            //Check if YRL nd Duration are valid befor Updating.
+            if (validateDuration(duration) && validateLink(movieLink))
+            {   //if there is no ID then you need to add it.
+                if (id == -1)
+                {
+                    logicMovies.AddNewMovie(newName, duration, movieLink, catName);
+                    refreshDataGridMovies();
+                }// if you have an ID you need to update it.
+                else
+                {
+                    logicMovies.UpdateMovie(id, newName, duration, movieLink, catName);
+                    refreshDataGridMovies();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Duration or Link are not well formated.\n Please make sure it's in the correct format and try again.");
+            }
+        }
+
+        private void dataGridViewMovies_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            //refreshDataGridMovies();
+        }
+
+
     }
 }
