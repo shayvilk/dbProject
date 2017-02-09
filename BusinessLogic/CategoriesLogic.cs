@@ -58,8 +58,6 @@ namespace BusinessLogic
            string categoryName = GetCategoryNameByID(categoryID);
            UpdateCategories(newName, categoryName);
        }
-
-
        public void UpdateCategories(string newName, string selectedName)
        {
            if (newName == "")
@@ -145,7 +143,6 @@ namespace BusinessLogic
            }
            return categoriesName;
        }
-
        public void GetCategoriesDetails(DataGridView dgv)
        {
            dgv.Columns.Clear();
@@ -168,7 +165,6 @@ namespace BusinessLogic
                dgv.Rows.Add(dgvRows.ToArray());
            }
        }
-
        private string GetCategoryNameByID(int categoryID)
        {
            var query = db.Categories.Where(c => c.CategoryID == categoryID).FirstOrDefault();

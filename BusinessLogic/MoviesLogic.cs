@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,6 +81,34 @@ namespace BusinessLogic
                // If someone delete/updated the Movie in the database before the user pressed the "update" button.
                MessageBox.Show("There is no movie named " + currentMovieName); 
        }
+       public void UpdateMovie(int movieID, string newMovieName, string duration, string movieLink, string categoryName)
+       {
+           var query = db.Movies.Where(m => m.MovieID == movieID).FirstOrDefault();
+
+           if (query != null)
+           {
+               //  Finding the CategoryID matching the selected categoryName
+               var catID = db.Categories.Where(c => c.CategoryName == categoryName).FirstOrDefault();
+
+                   query.MovieName = newMovieName; // If he did change
+               string[] strTsArr = duration.Split(':');
+               int h = int.Parse(strTsArr[0]);
+               int m = int.Parse(strTsArr[1]);
+               int s = int.Parse(strTsArr[2]);
+
+               TimeSpan ts = new TimeSpan(h,m,s);
+               query.Duration = ts;
+               query.MovieLink = movieLink;
+               query.CategoryName = categoryName;
+               query.CategoryID = catID.CategoryID;
+               db.SaveChanges();
+
+               MessageBox.Show("Done!");
+           }
+           else
+               // If someone delete/updated the Movie in the database before the user pressed the "update" button.
+               MessageBox.Show("There is no movie named " + query.MovieName);
+       }
 
        /// <summary>
        /// Deleting movie from the DB
@@ -131,19 +160,55 @@ namespace BusinessLogic
            }
            return moviesName;
        }
+       
 
-       public void GetAllMoviesDetails(DataGridView dgv)
+       public void GetAllMoviesDetails(DataGridView dgv, bool editable)
        {
+
            dgv.Columns.Clear();
            dgv.Rows.Clear();
            dgv.Refresh();
 
-           dgv.ColumnCount = 6;
+           var query1 = db.Categories.Select(m => new
+           {
+               m.CategoryID,
+               m.CategoryName
+           });
+           ArrayList CategoryList = new ArrayList();
+           System.Data.DataTable dataTable = new DataTable();
+           dataTable.Columns.Add("CategoryId");
+           dataTable.Columns.Add("CategoryName");
+
+
+           foreach (var item in query1)
+           {
+               //CategoryList.Add(item.CategoryID);
+               //CategoryList.Add(item.CategoryName);
+               dataTable.Rows.Add(item.CategoryID, item.CategoryName);
+
+
+
+           }
+           var columnComboBox = new DataGridViewComboBoxColumn();
+           columnComboBox.Name = "test";
+           columnComboBox.DataSource = dataTable;
+           columnComboBox.ValueMember = "CategoryId";
+           columnComboBox.DisplayMember = "CategoryName";
+           
+
+
+
+           dgv.ColumnCount = 5;
+           dgv.Columns.Insert(2, columnComboBox);
+           //dgv.Columns.Add(columnComboBox);
            dgv.Columns[0].Name = "Movie ID";
+           
+           dgv.Columns["Movie ID"].ReadOnly = true;
            dgv.Columns[1].Name = "Movie Name";
            dgv.Columns[2].Name = "Category Name";
            dgv.Columns[3].Name = "Category ID";
            dgv.Columns[4].Name = "Duration";
+           //dgv.Columns[4].ValueType = DataFormats.Text.
            dgv.Columns[5].Name = "Movie link";
 
            var query = db.Movies.Select(m => new
@@ -158,21 +223,38 @@ namespace BusinessLogic
 
            DataGridViewButtonColumn dgvbc = new DataGridViewButtonColumn();
            dgv.Columns.Add(dgvbc);
+           
+           DataGridViewButtonColumn dgvSave = new DataGridViewButtonColumn();
+           dgvSave.Name = "Save";
+           dgv.Columns.Add(dgvSave);
+
+
+           if (editable)
+           {
+               dgv.Columns["Save"].Visible = true;
+           }
 
            dgvbc.HeaderText = "Click to watch";
+           dgvbc.Name = "Click to watch";
+           dgvSave.Name = "Save";
 
            foreach (var item in query)
            {
-               dgvbc.Name = "Click to watch";
 
                ArrayList dgvRows = new ArrayList();
                dgvRows.Add(item.MovieID);
                dgvRows.Add(item.MovieName);
-               dgvRows.Add(item.CategoryName);
+               dgvRows.Add(item.CategoryID.ToString());
                dgvRows.Add(item.CategoryID);
                dgvRows.Add(item.Duration);
                dgvRows.Add(item.MovieLink);
                dgvRows.Add(dgvbc.Name);
+               if (editable)
+               {
+                   dgvRows.Add(dgvSave.Name);
+
+               }
+
 
                dgv.Rows.Add(dgvRows.ToArray());
            }
