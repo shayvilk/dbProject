@@ -40,7 +40,7 @@ namespace BusinessLogic
 
            db.Movies.Add(mov);
            db.SaveChanges();
-           MessageBox.Show("Done");
+           MessageBox.Show("Movie Added");
        }
 
        /// <summary>
@@ -75,7 +75,7 @@ namespace BusinessLogic
                query.CategoryID = catID.CategoryID;
                db.SaveChanges();
 
-               MessageBox.Show("Done!");
+               MessageBox.Show("Movie Updated!");
            }
            else
                // If someone delete/updated the Movie in the database before the user pressed the "update" button.
@@ -99,7 +99,7 @@ namespace BusinessLogic
                query.CategoryID = catID.CategoryID;
                db.SaveChanges();
 
-               MessageBox.Show("Done!");
+               MessageBox.Show("Movie Updated!");
            }
            else
                // If someone delete/updated the Movie in the database before the user pressed the "update" button.

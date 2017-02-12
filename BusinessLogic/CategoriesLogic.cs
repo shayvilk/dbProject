@@ -40,7 +40,7 @@ namespace BusinessLogic
                db.SaveChanges();
 
                isOk = true;
-               MessageBox.Show("Done");
+               MessageBox.Show("Catagory added");
            }
            else
                MessageBox.Show("The category " + newCategory + " already exist");
