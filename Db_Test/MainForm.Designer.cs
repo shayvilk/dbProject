@@ -85,8 +85,11 @@
             this.editManagerBtn.BackColor = System.Drawing.Color.Azure;
             this.editManagerBtn.BackgroundImage = global::DB_Project.Properties.Resources.editListIcon;
             this.editManagerBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.editManagerBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.editManagerBtn.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.editManagerBtn.FlatAppearance.BorderSize = 10;
             this.editManagerBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.editManagerBtn.Font = new System.Drawing.Font("Poor Richard", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editManagerBtn.ForeColor = System.Drawing.Color.LawnGreen;
             this.editManagerBtn.Location = new System.Drawing.Point(12, 274);
             this.editManagerBtn.Name = "editManagerBtn";
             this.editManagerBtn.Size = new System.Drawing.Size(145, 220);
@@ -103,15 +106,14 @@
             this.moviesListBtn.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.moviesListBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.moviesListBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.moviesListBtn.Font = new System.Drawing.Font("Poor Richard", 10F, System.Drawing.FontStyle.Italic);
-            this.moviesListBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.moviesListBtn.Font = new System.Drawing.Font("Poor Richard", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.moviesListBtn.ForeColor = System.Drawing.Color.LawnGreen;
             this.moviesListBtn.Location = new System.Drawing.Point(12, 41);
             this.moviesListBtn.Name = "moviesListBtn";
             this.moviesListBtn.Size = new System.Drawing.Size(145, 220);
             this.moviesListBtn.TabIndex = 0;
             this.moviesListBtn.Text = "Movies List";
             this.moviesListBtn.UseVisualStyleBackColor = false;
-            this.moviesListBtn.UseWaitCursor = true;
             this.moviesListBtn.Click += new System.EventHandler(this.moviesListBtn_Click);
             // 
             // openBrowser_btn
@@ -150,7 +152,7 @@
             this.ExitBrowserBtn.UseVisualStyleBackColor = false;
             this.ExitBrowserBtn.Click += new System.EventHandler(this.ExitBrowserBtn_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -163,8 +165,8 @@
             this.Controls.Add(this.moviesListBtn);
             this.Controls.Add(this.openBrowser_btn);
             this.Controls.Add(this.webBrowserCtl);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainForm";
+            this.Text = "youtube viewer";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMovies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCategories)).EndInit();
             this.ResumeLayout(false);

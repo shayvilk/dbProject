@@ -32,12 +32,13 @@ namespace DB_Project
             refreshDataGridCategories();
             dataGridViewCategories.Visible = false;
             webBrowserCtl.Visible = false;
+            ExitBrowserBtn.Visible = false;
             
-            Button btn = this.Controls.Find(moviesListBtn.Name, true)[0] as Button;
-            btn.BackColor = System.Drawing.Color.Blue;
-            btn.FlatStyle = FlatStyle.Flat;
-            btn.FlatAppearance.BorderColor = Color.Red;
-            btn.FlatAppearance.BorderSize = 1;
+            //Button btn = this.Controls.Find(moviesListBtn.Name, true)[0] as Button;
+            //btn.BackColor = System.Drawing.Color.Blue;
+            //btn.FlatStyle = FlatStyle.Flat;
+            //btn.FlatAppearance.BorderColor = Color.Red;
+            //btn.FlatAppearance.BorderSize = 1;
         }
 
         private void uiDisplaySelector(bool mode)
