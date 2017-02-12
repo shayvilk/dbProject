@@ -12,40 +12,51 @@ using System.Windows.Forms;
 
 namespace DB_Project
 {
-    public partial class Form1 : Form
+
+    public partial class MainForm : Form
     {
         MoviesLogic logicMovies = new MoviesLogic();
         CategoriesLogic logicCategories = new CategoriesLogic();
+        public bool editMode { get; set; }
+        
+        
 
 
-        public Form1()
+
+        public MainForm()
         {
             InitializeComponent();
-            refreshDataGridMovies();
-            dataGridViewMovies.Visible = true;
+            editMode = false;
+            refreshDataGridMovies(editMode);
+
             refreshDataGridCategories();
-            dataGridViewCategories.Visible = true;
+            dataGridViewCategories.Visible = false;
+            webBrowserCtl.Visible = false;
+            
+            Button btn = this.Controls.Find(moviesListBtn.Name, true)[0] as Button;
+            btn.BackColor = System.Drawing.Color.Blue;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderColor = Color.Red;
+            btn.FlatAppearance.BorderSize = 1;
         }
 
-        private void refreshDataGridMovies()
+        private void uiDisplaySelector(bool mode)
         {
-            logicMovies.GetAllMoviesDetails(dataGridViewMovies, true);
+
+                refreshDataGridMovies(mode);
+                dataGridViewCategories.Visible = mode;
+
+        }
+
+
+        private void refreshDataGridMovies(bool editable)
+        {
+            logicMovies.GetAllMoviesDetails(dataGridViewMovies, editable);
         }
 
         private void refreshDataGridCategories()
         {
             logicCategories.GetCategoriesDetails(dataGridViewCategories);
-        }
-
-        private void uiDisplaySelector(bool mode)
-        {
-            if (mode)
-            {
-                dataGridViewMovies.Visible = true;
-                manageMoviesBtn.Visible = false;
-                manageCatagoriesBtn.Visible = false;
-
-            }
         }
 
 
@@ -69,7 +80,8 @@ namespace DB_Project
         /// <returns></returns>
         public bool validateLink(string strLink)
         {
-            Regex regex = new Regex(@"^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$");
+            Regex regex = new Regex(@"^(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$");
+            //Regex regex = new Regex(@"^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$");
             Match match = regex.Match(strLink);
             return match.Success;
         }
@@ -155,9 +167,10 @@ namespace DB_Project
 
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0 && senderGrid.Columns[e.ColumnIndex].Name == "Click to watch")
             {
-                WatchMovieForm watchMov = new WatchMovieForm();
-                watchMov.Show();
-                watchMov.webBrowser1.Navigate(dataGridViewMovies.Rows[e.RowIndex].Cells[5].Value.ToString());
+                ExitBrowserBtn.Visible = true;
+                webBrowserCtl.Visible = true;
+                webBrowserCtl.BringToFront();
+                webBrowserCtl.Navigate(dataGridViewMovies.Rows[e.RowIndex].Cells[5].Value.ToString());
             }
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0 && senderGrid.Columns[e.ColumnIndex].Name == "Save")
             {
@@ -179,14 +192,14 @@ namespace DB_Project
                 if ( id > 0 )
                 {
                     logicMovies.DeleteMovie(id);
-                    refreshDataGridMovies();
+                    refreshDataGridMovies(editMode);
                 }
                 else
                 {
                     try
                     {
                         senderGrid.Rows.RemoveAt(e.RowIndex);
-                        refreshDataGridMovies();
+                        refreshDataGridMovies(editMode);
                     }
                     catch (Exception)
                     {
@@ -232,12 +245,12 @@ namespace DB_Project
                 if (id == -1)
                 {
                     logicMovies.AddNewMovie(newName, duration, movieLink, catName);
-                    refreshDataGridMovies();
+                    refreshDataGridMovies(editMode);
                 }// if you have an ID you need to update it.
                 else
                 {
                     logicMovies.UpdateMovie(id, newName, duration, movieLink, catName);
-                    refreshDataGridMovies();
+                    refreshDataGridMovies(editMode);
                 }
             }
             else
@@ -248,8 +261,35 @@ namespace DB_Project
 
         private void dataGridViewMovies_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            //refreshDataGridMovies();
+            //refreshDataGridMovies(editMode);
+            
         }
+
+        private void moviesListBtn_Click(object sender, EventArgs e)
+        {
+            editMode = false;
+            uiDisplaySelector(editMode);
+        }
+
+        private void editManagerBtn_Click(object sender, EventArgs e)
+        {
+            editMode = true;
+            uiDisplaySelector(editMode);
+        }
+
+        private void ExitBrowserBtn_Click(object sender, EventArgs e)
+        {
+            webBrowserCtl.Visible = false;
+            ExitBrowserBtn.Visible = false;
+        }
+
+        private void openBrowser_btn_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.youtube.com");
+
+        }
+
+
 
 
     }

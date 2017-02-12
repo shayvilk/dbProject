@@ -81,6 +81,7 @@ namespace BusinessLogic
                // If someone delete/updated the Movie in the database before the user pressed the "update" button.
                MessageBox.Show("There is no movie named " + currentMovieName); 
        }
+
        public void UpdateMovie(int movieID, string newMovieName, string duration, string movieLink, string categoryName)
        {
            var query = db.Movies.Where(m => m.MovieID == movieID).FirstOrDefault();
@@ -239,8 +240,17 @@ namespace BusinessLogic
 
            if (editable)
            {
+               dgv.ReadOnly = false;
                dgv.Columns["Save"].Visible = true;
                dgv.Columns["Delete"].Visible = true;
+           }
+           else
+           {
+               dgv.ReadOnly = true;
+               dgv.Columns["Save"].Visible = false;
+               dgv.Columns["Delete"].Visible = false;
+           
+
            }
 
            dgvbc.HeaderText = "Click to watch";

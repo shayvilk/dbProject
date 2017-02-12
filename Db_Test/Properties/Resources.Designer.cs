@@ -63,6 +63,26 @@ namespace DB_Project.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap editListIcon {
+            get {
+                object obj = ResourceManager.GetObject("editListIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap miviesListLogo {
+            get {
+                object obj = ResourceManager.GetObject("miviesListLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap YouTube_logo_full_color {
             get {
                 object obj = ResourceManager.GetObject("YouTube-logo-full_color", resourceCulture);
